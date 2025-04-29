@@ -1,0 +1,10 @@
+:root {
+	--typography-body: "Poppins";
+	--typography-heading: "Poppins";
+}
+
+*,
+html,
+body {
+	font-family: var(--typography-body);
+}

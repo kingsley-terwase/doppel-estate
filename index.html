@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/Logo/Logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Doppel Estate</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Satisfy&display=swap"
+      rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sen:wght@400..800&display=swap" rel="stylesheet">
+  </head>
+
+  <body>
+    <style>
+      .loader {
+        position: relative;
+        /* Establish a positioning context */
+        width: 40px;
+        /* Container size */
+        height: 40px;
+        background: url('/Logo/Logo.png') center/contain no-repeat;
+        /* Your logo in the center */
+      }
+
+      .loader::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 4px;
+        /* Base dot size */
+        height: 4px;
+        border-radius: 50%;
+        color: #25b09b;
+        --d: 22px;
+        box-shadow:
+          calc(1 * var(--d)) calc(0 * var(--d)) 0 0,
+          calc(0.707 * var(--d)) calc(0.707 * var(--d)) 0 1px,
+          calc(0 * var(--d)) calc(1 * var(--d)) 0 2px,
+          calc(-0.707 * var(--d)) calc(0.707 * var(--d)) 0 3px,
+          calc(-1 * var(--d)) calc(0 * var(--d)) 0 4px,
+          calc(-0.707 * var(--d)) calc(-0.707 * var(--d)) 0 5px,
+          calc(0 * var(--d)) calc(-1 * var(--d)) 0 6px;
+        transform: translate(-50%, -50%);
+        animation: l27 1s infinite steps(8);
+      }
+
+      @keyframes l27 {
+        100% {
+          transform: translate(-50%, -50%) rotate(1turn);
+        }
+      }
+    </style>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+
+</html>
