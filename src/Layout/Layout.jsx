@@ -7,7 +7,7 @@ import ScrollToTop from "../Component/ScrollToTop/ScrollToTop";
 function Layout({ children }) {
   const location = useLocation();
 
-  const noLayoutRoutes = ["/login", "/verify-email", "/sign-up", "/otp"];
+  const noLayoutRoutes = ["/login", "/verify-email", "/signup", "/otp"];
 
   const hideLayout = noLayoutRoutes.includes(location.pathname);
   return (

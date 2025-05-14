@@ -73,7 +73,7 @@ export default function DashboardSidenav() {
             <Drawer variant="permanent" open={open}>
                 <DrawerHeader>
                     <Stack direction="row" spacing={1} alignItems="center">
-                        <img style={styles.logoImg} src="/Logo/Logo.svg" alt="logo" />
+                        <img style={styles.logoImg} src="/Logo/Logo.png" alt="logo" />
                         {open && (
                             <Typography
                                 variant="body1"
@@ -84,7 +84,7 @@ export default function DashboardSidenav() {
                                     color: COLOR.text.primary,
                                 }}
                             >
-                                CHIPS
+                                Doppel Estate
                             </Typography>
                         )}
                     </Stack>

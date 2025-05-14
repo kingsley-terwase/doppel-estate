@@ -15,7 +15,8 @@ export const styles = {
     },
 
     logoImg: {
-        width: "#",
+        width: "30px",
+        height: "30px",
     },
 
     togBtn: {
