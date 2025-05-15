@@ -21,14 +21,12 @@ const DashboardNav = ({ onTog }) => {
         switch (pathname) {
             case "/dashboard":
                 return "Dashboard";
-            case "/dashboard/marketplace":
-                return "MarketPlace";
-            case "/dashboard/pools":
-                return "Pools";
+            case "/dashboard/listing":
+                return "Listing";
+            case "/dashboard/message":
+                return "Message";
             case "/dashboard/profile":
                 return "Profile";
-            case "/dashboard/settings":
-                return "Settings";
             default:
                 return "Dashboard";
         }
@@ -41,7 +39,7 @@ const DashboardNav = ({ onTog }) => {
             sx={{
                 ...styles.nav,
                 color: theme.palette.text.primary,
-                backgroundColor: theme.palette.background.default,
+                backgroundColor: 'black',
                 borderBottom:
                     theme.palette.mode === "light"
                         ? "1px solid rgba(0, 0, 0, 0.1)"
@@ -57,24 +55,6 @@ const DashboardNav = ({ onTog }) => {
 
             <Stack {...navStackRow}>
                 <ThemeToggleButton />
-                <Box>
-                    <Button
-                        sx={{
-                            display: "flex",
-                            whiteSpace: "nowrap",
-                            textTransform: "capitalize",
-                            color: "#fff",
-                            px: { xs: "1px", md: "10px" },
-                            backgroundColor: BUTTON_BORDER.body.primary,
-                            border: BUTTON_BORDER.border.primary,
-                        }}
-                    >
-                        <span>
-                            <WalletCreditCardRegular style={{ fontSize: "24px" }} />
-                        </span>
-                        Connect Wallet
-                    </Button>
-                </Box>
             </Stack>
         </Box>
     );
