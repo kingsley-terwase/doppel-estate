@@ -1,179 +1,265 @@
-import React, {useState, useEffect} from "react";
-import Box from "@mui/material/Box";
-import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
-import IconButton from "@mui/material/IconButton";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import TwitterIcon from "@mui/icons-material/Twitter";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import Container from "@mui/material/Container";
-import Divider from "@mui/material/Divider";
-import MenuIcon from "@mui/icons-material/Menu";
-import Drawer from "@mui/material/Drawer";
-import CloseIcon from "@mui/icons-material/Close";
-import AppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import {FONT_FAMILY} from "../../Config/font";
-import {navLinks} from "./static";
-import {Link, useLocation} from "react-router-dom";
-import {style} from "./styles";
-import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
-import AnimatedText from "../Animation/AnimatedText";
-import Button from "@mui/material/Button";
-import {COLOR} from "../../Config/color";
-import HeroSearchSection from "../HeroSearch";
+import React, { useState } from 'react'
+import AppBar from '@mui/material/AppBar'
+import Toolbar from '@mui/material/Toolbar'
+import Container from '@mui/material/Container'
+import Box from '@mui/material/Box'
+import Stack from '@mui/material/Stack'
+import Typography from '@mui/material/Typography'
+import IconButton from '@mui/material/IconButton'
+import Drawer from '@mui/material/Drawer'
+import Button from '@mui/material/Button'
+import MenuIcon from '@mui/icons-material/Menu'
+import CloseIcon from '@mui/icons-material/Close'
+import { Link, useLocation } from 'react-router-dom'
+import Slider from 'react-slick'
+import { FONT_FAMILY } from '../../Config/font'
+import { navLinks } from './static'
+import { COLOR } from '../../Config/color'
+import { NextArrow, PrevArrow } from '../ArrowsCmpnt'
+import HeroSearchSection from '../HeroSearch'
+import AnimatedText from '../Animation/AnimatedText'
 
+const sliderData = [
+  {
+    image: '/Images/Home_4.png',
+    overlay: 'rgba(0, 0, 0, 0.5)',
+    title: 'Find Your Dream Home',
+    subtitle: 'Luxury properties across the globe, We have listed over 100000+ property in our database'
+  },
+  {
+    image: '/Images/Home_5.png',
+    overlay: 'rgba(0, 0, 0, 0.5)',
+    title: 'Invest in Your Future',
+    subtitle: 'The smartest real estate decisions'
+  },
+  {
+    image: '/Images/Home_14.png',
+    overlay: 'rgba(12, 1, 1, 0.5)',
+    title: 'Comfort & Style',
+    subtitle: 'Live where you love'
+  }
+]
 
 const Header = () => {
-    const location = useLocation();
-    const isHomePage = location.pathname === "/";
-    const [showTopNav, setShowTopNav] = useState(true);
-    const [isScrolled, setIsScrolled] = useState(false);
-    const [drawerOpen, setDrawerOpen] = useState(false);
-    const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const location = useLocation()
+  const isHomePage = location.pathname === '/'
+  const [isScrolled, setIsScrolled] = useState(false)
+  const [drawerOpen, setDrawerOpen] = useState(false)
 
-    const backgrounds = [
-        {image: "/Images/Home_4.png", overlay: "rgba(0, 0, 0, 0.8)"},
-        {image: "/Images/Home_5.png", overlay: "rgba(0, 0, 0, 0.8)"},
-        {image: "/Images/Home_6.png", overlay: "rgba(50, 0, 0, 0.6)"},
-    ];
+  const toggleDrawer = () => setDrawerOpen(!drawerOpen)
 
-    useEffect(() => {
-        const handleScroll = () => {
-            const scrollY = window.scrollY;
-            setIsScrolled(scrollY > 60);
-            setShowTopNav(scrollY <= 60);
-        };
-        window.addEventListener("scroll", handleScroll);
+  React.useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 60)
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
-        const interval = setInterval(() => {
-            setCurrentImageIndex((prevIndex) => (prevIndex + 1) % backgrounds.length);
-        }, 5000);
+  const sliderSettings = {
+    dots: false,
+    infinite: true,
+    arrows: true,
+    autoplay: false,
+    speed: 800,
+    autoplaySpeed: 5000,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    adaptiveHeight: true,
+    nextArrow: <NextArrow />,
+    prevArrow: <PrevArrow />
+  }
 
-        return () => {
-            window.removeEventListener("scroll", handleScroll);
-            clearInterval(interval);
-        };
-    }, []);
-
-    const toggleDrawer = () => setDrawerOpen(!drawerOpen);
-
-    return (
-        <>
-            <AppBar
-                position="fixed"
-                elevation={isScrolled ? 0 : 0}
-                sx={{
-                    backgroundColor: isScrolled || !isHomePage ? "white" : "transparent",
-                    boxShadow: isScrolled || !isHomePage ? "2px 4px 6px rgba(0, 0, 0, 0.2)" : null,
-                    color: isScrolled || !isHomePage ? "black" : "white",
-                    transition: "background-color 0.3s ease, color 0.3s ease",
-                    ...(isHomePage && {
-                        padding: isScrolled ? "0" : {xs: "0", sm: "1rem 2rem"},
-                    }),
-                }}
-            >
-                <Container maxWidth="lg">
-                    <Toolbar disableGutters sx={{justifyContent: "space-between", width: "100%"}}>
-                        <Link style={{textDecoration: "none"}} to="/">
-                            <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', paddingRight: "1rem"}}>
-                                <img style={{ width: "70px" }} src="/Logo/Logo.png" alt="logo" />
-                                <Typography variant="body1" sx={{ color: isScrolled ? "#000" : "#fff" }}>Doppel Estate</Typography>
-                            </Box>
-                        </Link>
-                        <Box sx={{display: {xs: "block", md: "none"}}}>
-                            <IconButton onClick={toggleDrawer} color="inherit">
-                                <MenuIcon />
-                            </IconButton>
-                        </Box>
-                        <Stack
-                            direction="row"
-                            spacing={3}
-                            sx={{display: {xs: "none", md: "flex"}, marginLeft: "auto", pr: 2}}
-                        >
-                            {navLinks.map((link, index) => (
-                                <Link key={index} to={link.path} style={{textDecoration: "none", color: "inherit"}}>
-                                    <Typography sx={{fontFamily: FONT_FAMILY.primary, pt: "9px"}}>
-                                        {link.label}
-                                    </Typography>
-                                </Link>
-                            ))}
-                            <Link to="/login" style={{textDecoration: "none", color: "inherit"}}>
-                                <Button
-                                    sx={{
-                                        textTransform: "capitalize",
-                                        color: "white",
-                                        borderRadius: '40px',
-                                        py: "5px",
-                                        px: "2rem",
-                                        backgroundColor: COLOR.primary,
-                                        fontFamily: FONT_FAMILY.primary,
-                                    }}
-                                >
-                                    Login
-                                </Button>
-                            </Link>
-                        </Stack>
-                    </Toolbar>
-                </Container>
-            </AppBar>
-
-            <Drawer anchor="right" open={drawerOpen} onClose={toggleDrawer}>
-                <Box sx={{width: 250, padding: "1rem"}}>
-                    <IconButton onClick={toggleDrawer} sx={{mb: 2}}>
-                        <CloseIcon />
-                    </IconButton>
-                    <Stack spacing={2}>
-                        {navLinks.map((link, index) => (
-                            <Typography key={index} variant="body1" onClick={toggleDrawer} sx={{cursor: "pointer"}}>
-                                {link.label}
-                            </Typography>
-                        ))}
-                    </Stack>
-                </Box>
-            </Drawer>
-            {isHomePage && (
-                <Box
-                    sx={{
-                        position: "relative",
-                        backgroundImage: `url(${backgrounds[currentImageIndex].image})`,
-                        backgroundSize: "cover",
-                        backgroundPosition: "center",
-                        display: 'center',
-                        alignItems: 'center',
-                        justifyContent: 'Center',
-                        height: "700px",
-                        color: "white",
-                        overflow: "hidden",
-                    }}
+  return (
+    <>
+      <AppBar
+        position='fixed'
+        elevation={isScrolled ? 1 : 0}
+        sx={{
+          backgroundColor: isScrolled || !isHomePage ? 'white' : 'transparent',
+          boxShadow:
+            isScrolled || !isHomePage
+              ? '2px 4px 6px rgba(0, 0, 0, 0.2)'
+              : 'none',
+          color: isScrolled || !isHomePage ? 'black' : 'white',
+          transition: 'background-color 0.3s ease, color 0.3s ease'
+        }}
+      >
+        <Container maxWidth='lg'>
+          <Toolbar disableGutters sx={{ justifyContent: 'space-between' }}>
+            <Link to='/' style={{ textDecoration: 'none' }}>
+              <Box sx={{ display: 'flex', alignItems: 'center', pr: 2 }}>
+                <img
+                  style={{ width: '70px' }}
+                  src='/Logo/Logo.png'
+                  alt='logo'
+                />
+                <Typography
+                  variant='body1'
+                  sx={{ color: isScrolled ? '#000' : '#fff' }}
                 >
-                    <Box
-                        sx={{
-                            position: "absolute",
-                            top: 0,
-                            left: 0,
-                            width: "100%",
-                            height: "100%",
-                            backgroundColor: backgrounds[currentImageIndex].overlay, 
-                            zIndex: 2,
-                        }}
-                    />
-                    <Box
-                        sx={{
-                            position: "relative",
-                            zIndex: 2,
-                            textAlign: "center",
-                            mt: "6rem",
-                            mx: "auto",
-                            // width: {xs: "90%", sm: "80%", md: "100%"},
-                        }}
-                    >
-                        <HeroSearchSection />
-                    </Box>
-                </Box>
-            )}
-        </>
-    );
-};
+                  Doppel Estate
+                </Typography>
+              </Box>
+            </Link>
 
-export default Header;
+            <Box sx={{ display: { xs: 'block', md: 'none' } }}>
+              <IconButton onClick={toggleDrawer} color='inherit'>
+                <MenuIcon />
+              </IconButton>
+            </Box>
+
+            <Stack
+              direction='row'
+              spacing={3}
+              sx={{ display: { xs: 'none', md: 'flex' }, ml: 'auto', pr: 2 }}
+            >
+              {navLinks.map((link, i) => (
+                <Link
+                  key={i}
+                  to={link.path}
+                  style={{ textDecoration: 'none', color: 'inherit' }}
+                >
+                  <Typography
+                    sx={{ fontFamily: FONT_FAMILY.primary, pt: '9px' }}
+                  >
+                    {link.label}
+                  </Typography>
+                </Link>
+              ))}
+              <Link
+                to='/login'
+                style={{ textDecoration: 'none', color: 'inherit' }}
+              >
+                <Button
+                  sx={{
+                    textTransform: 'capitalize',
+                    color: 'white',
+                    borderRadius: '40px',
+                    py: '5px',
+                    px: '2rem',
+                    backgroundColor: COLOR.primary,
+                    fontFamily: FONT_FAMILY.primary
+                  }}
+                >
+                  Login
+                </Button>
+              </Link>
+            </Stack>
+          </Toolbar>
+        </Container>
+      </AppBar>
+
+      <Drawer anchor='right' open={drawerOpen} onClose={toggleDrawer}>
+        <Box sx={{ width: 250, padding: '1rem' }}>
+          <IconButton onClick={toggleDrawer} sx={{ mb: 2 }}>
+            <CloseIcon />
+          </IconButton>
+          <Stack spacing={2}>
+            {navLinks.map((link, index) => (
+              <Link
+                key={index}
+                to={link.path}
+                onClick={toggleDrawer}
+                style={{ textDecoration: 'none' }}
+              >
+                <Typography variant='body1' sx={{ cursor: 'pointer' }}>
+                  {link.label}
+                </Typography>
+              </Link>
+            ))}
+          </Stack>
+        </Box>
+      </Drawer>
+
+      {isHomePage && (
+        <Box
+          className='custom-slider'
+          sx={{ position: 'relative', height: '600px', overflow: 'hidden' }}
+        >
+          <Slider {...sliderSettings}>
+            {sliderData.map((slide, i) => (
+              <Box
+                key={i}
+                sx={{
+                  position: 'relative',
+                  height: '600px',
+                  backgroundImage: `url(${slide.image})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}
+              >
+                <Box
+                  sx={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    backgroundColor: slide.overlay,
+                    zIndex: 1
+                  }}
+                />
+                <Box
+                  sx={{
+                    position: 'relative',
+                    zIndex: 2,
+                    color: 'white',
+                    textAlign: 'center',
+                    mx: 'auto',
+                    mt: 25,
+                    px: 2
+                  }}
+                >
+                  <Typography
+                    variant='subtitle1'
+                    sx={{
+                      color: '#fff',
+                      fontFamily: FONT_FAMILY.secondary,
+                      mb: 2,
+                      textAlign: 'center'
+                    }}
+                  >
+                    Doppel Estate
+                  </Typography>
+                  <AnimatedText
+                    text={slide.title}
+                    sx={{
+                      '& span': {
+                        fontFamily: FONT_FAMILY.sept
+                      },
+                      fontWeight: 900,
+                      fontSize: {
+                        xs: '0.5rem',
+                        sm: '0.9rem',
+                        md: '1rem',
+                        lg: '2rem',
+                        xl: '2.1rem'
+                      },
+                      color: '#fff',
+                      mb: 1,
+                      textAlign: 'center'
+                    }}
+                  />
+
+                  <Typography
+                    variant='body1'
+                    sx={{ fontFamily: FONT_FAMILY.sept, mb: 4,  mx:'30px',}}
+                  >
+                    {slide.subtitle}
+                  </Typography>
+                  <HeroSearchSection />
+                </Box>
+              </Box>
+            ))}
+          </Slider>
+        </Box>
+      )}
+    </>
+  )
+}
+
+export default Header

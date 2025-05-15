@@ -4,4 +4,5 @@ export const FONT_FAMILY = {
   tertiary: 'Work Sans',
   quaternary: 'Sen',
   quinary: 'Barlow',
+  sept: 'Comfortaa',
 };

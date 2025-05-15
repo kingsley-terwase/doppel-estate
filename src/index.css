@@ -8,3 +8,9 @@ html,
 body {
 	font-family: var(--typography-body);
 }
+
+
+.custom-slider .slick-prev,
+.custom-slider .slick-next {
+  z-index: 10;
+}
