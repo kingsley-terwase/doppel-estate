@@ -23,9 +23,11 @@ const BackToTopBtn = () => {
             <Fab
                 onClick={scrollToTop}
                 sx={{
-                  backgroundColor: COLOR.primary,
+                    backgroundColor: COLOR.primary,
+                    color: '#fff',
                   "&:hover": {
-                    backgroundColor: "white",
+                      backgroundColor: "white",
+                      color: '#000',
                   },
                     position: 'fixed',
                     bottom: 16,

@@ -1,6 +1,8 @@
 :root {
 	--typography-body: "Poppins";
 	--typography-heading: "Poppins";
+	--form-height: 48px;
+  --form-bg: #fff;
 }
 
 *,

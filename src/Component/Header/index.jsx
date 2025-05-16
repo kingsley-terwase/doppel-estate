@@ -79,7 +79,7 @@ const Header = () => {
           backgroundColor: isScrolled || !isHomePage ? 'white' : 'transparent',
           boxShadow:
             isScrolled || !isHomePage
-              ? '2px 4px 6px rgba(0, 0, 0, 0.2)'
+              ? 'none'
               : 'none',
           color: isScrolled || !isHomePage ? 'black' : 'white',
           transition: 'background-color 0.3s ease, color 0.3s ease'

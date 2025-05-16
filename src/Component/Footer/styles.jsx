@@ -4,7 +4,8 @@ import {FONT_FAMILY} from "../../Config/font";
 export const style = {
     footerContainer: {
         backgroundColor: "#000000",
-        padding: "5rem 1rem",
+        paddingTop: "5rem",
+        paddingBottom: '1rem',
         color: "#fff",
     },
     footerContent: {
