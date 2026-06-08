@@ -1,5 +1,5 @@
 import Layout from "../Layout/Layout";
-import {BrowserRouter, Routes, Route} from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import BackToTopBtn from "../Component/BackToTopBtn/BackToTopBtn";
 import HomePage from "../Pages/Public/Home";
 import Properties from "../Pages/Public/Properties";
@@ -10,7 +10,8 @@ import BlogPage from "../Pages/Public/Blog";
 import SingleBlogPage from "../Pages/Public/SingleBlogPage";
 import AboutUsPage from "../Pages/Public/AboutUs";
 import PropertyDetail from "../Pages/Public/PropertyDetail";
-import OtpVerification from '../Pages/Public/OtpVerification'
+import OtpVerification from "../Pages/Public/OtpVerification";
+
 const PublicRoutes = () => {
     return (
         <Layout>
