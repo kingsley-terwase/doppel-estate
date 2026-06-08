@@ -1,8 +1,10 @@
 import React from 'react';
 import { Grid, Typography } from '@mui/material';
 import { FONT_FAMILY } from '../../../../Config/font';
+import { useTheme } from '@mui/material/styles';
 
 const ImageSection = () => {
+  const theme = useTheme();
   return (
     <Grid
       item
@@ -13,7 +15,7 @@ const ImageSection = () => {
       xl={6}
       sx={{
         height: '100vh',
-        backgroundColor: 'grey.300',
+        backgroundColor: theme.palette.background.contrastText,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
@@ -26,13 +28,17 @@ const ImageSection = () => {
           fontFamily: FONT_FAMILY.primary,
           fontWeight: 500,
           textAlign: 'center',
-          color: 'black',
+          color: theme.palette.text.primary,
         }}
       >
-        Image Placeholder
+        <img
+          src="./Images/Home_3.png"
+          alt="Signup Image"
+          style={{ width: '100%', height: '100vh' }}
+        />
       </Typography>
     </Grid>
-  );
+  )
 };
 
 export default ImageSection;

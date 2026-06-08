@@ -1,182 +1,169 @@
-import React from 'react';
-import { Box, Typography } from '@mui/material';
-import HomeIcon from '@mui/icons-material/Home';
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import CommentIcon from '@mui/icons-material/Comment';
-import { FONT_FAMILY } from '../../Config/font';
+import React from "react";
+import { Box, Typography } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
+
+import HomeIcon from "@mui/icons-material/Home";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import CommentIcon from "@mui/icons-material/Comment";
+
+import { FONT_FAMILY } from "../../Config/font";
+import { TYPOGRAPHY_SIZE } from "../../Config/typography";
+
+const analyticsCards = [
+  {
+    id: 1,
+    title: "Property Deals",
+    value: "530",
+    icon: HomeIcon,
+    tone: "primary",
+  },
+  {
+    id: 2,
+    title: "Property Views",
+    value: "349",
+    icon: VisibilityIcon,
+    tone: "secondary",
+  },
+  {
+    id: 3,
+    title: "Public Comments",
+    value: "120",
+    icon: CommentIcon,
+    tone: "accent",
+  },
+];
+
+const getToneColor = (tone, theme) => {
+  switch (tone) {
+    case "primary":
+      return theme.palette.primary.main;
+
+    case "secondary":
+      return theme.palette.secondary.main;
+
+    case "accent":
+      return theme.palette.custom.accent;
+
+    default:
+      return theme.palette.primary.main;
+  }
+};
 
 const CardGroup = () => {
+  const theme = useTheme();
+
   return (
     <Box
       sx={{
-        display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'space-around',
-        width: '100%',
-        padding: '20px',
-        boxSizing: 'border-box',
-        gap: '20px', 
+        display: "grid",
+        gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
+        gap: 2,
+        width: "100%",
+        p: { xs: 2, sm: 2.5 },
+        boxSizing: "border-box",
       }}
     >
-      <Box
-        sx={{
-          minWidth: '250px', 
-          flex: '1 1 calc(30% - 20px)',
-          height: '180px',
-          background: 'linear-gradient(135deg, #FFFFFF, #F5F5F5)',
-          borderRadius: '10px', 
-          boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          padding: '20px',
-          boxSizing: 'border-box',
-          transition: 'all 0.3s ease',
-          '&:hover': {
-            transform: 'scale(1.05)',
-          
-          },
-        }}
-      >
-        <Box sx={{ position: 'relative', marginBottom: '10px' }}>
-          <Box
-            sx={{
-              width: '50px',
-              height: '50px',
-              backgroundColor: '#424242',
-              borderRadius: '50%',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          />
-          <HomeIcon
-            sx={{
-              color: 'white',
-              fontSize: '28px',
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%, -50%)',
-            }}
-          />
-        </Box>
-        <Box textAlign="center">
-          <Typography sx={{ color: '#333', fontSize: '24px', fontWeight: 700 }}>
-            530
-          </Typography>
-          <Typography sx={{ color: '#666', fontSize: '14px', fontWeight: 500, fontFamily: FONT_FAMILY.tertiary }}>
-            Property Deals
-          </Typography>
-        </Box>
-      </Box>
+      {analyticsCards.map((card) => {
+        const color = getToneColor(card.tone, theme);
 
-      <Box
-        sx={{
-          minWidth: '250px',
-          flex: '1 1 calc(30% - 20px)',
-          height: '180px',
-          background: 'linear-gradient(135deg, #FFFFFF, #F5F5F5)',
-          borderRadius: '10px',
-          boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          padding: '20px',
-          boxSizing: 'border-box',
-          transition: 'all 0.3s ease',
-          '&:hover': {
-            transform: 'scale(1.05)',
-            boxShadow: '0 6px 16px rgba(0, 0, 0, 0.2)',
-          },
-        }}
-      >
-        <Box sx={{ position: 'relative', marginBottom: '10px' }}>
+        return (
           <Box
+            key={card.id}
             sx={{
-              width: '50px',
-              height: '50px',
-              backgroundColor: '#424242',
-              borderRadius: '50%',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          />
-          <VisibilityIcon
-            sx={{
-              color: 'white',
-              fontSize: '28px',
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%, -50%)',
-            }}
-          />
-        </Box>
-        <Box textAlign="center">
-          <Typography sx={{ color: '#333', fontSize: '24px', fontWeight: 700 }}>
-            349
-          </Typography>
-          <Typography sx={{ color: '#666', fontSize: '14px', fontWeight: 500, fontFamily: FONT_FAMILY.tertiary }}>
-            Property Views
-          </Typography>
-        </Box>
-      </Box>
+              height: 190,
 
-      {/* Card 3: Total Public Comments */}
-      <Box
-        sx={{
-          minWidth: '250px',
-          flex: '1 1 calc(30% - 20px)',
-          height: '180px',
-          background: 'linear-gradient(135deg, #FFFFFF, #F5F5F5)',
-          borderRadius: '10px',
-          boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          padding: '20px',
-          boxSizing: 'border-box',
-          transition: 'all 0.3s ease',
-          '&:hover': {
-            transform: 'scale(1.05)',
-            boxShadow: '0 6px 16px rgba(0, 0, 0, 0.2)',
-          },
-        }}
-      >
-        <Box sx={{ position: 'relative', marginBottom: '10px' }}>
-          <Box
-            sx={{
-              width: '50px',
-              height: '50px',
-              backgroundColor: '#424242',
-              borderRadius: '50%',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
+              background: `linear-gradient(135deg, ${color}20, ${
+                theme.palette.background.paper
+              })`,
+
+              borderRadius: 2,
+              border: `1px solid ${theme.palette.custom.card.border}`,
+
+              boxShadow: "0px 4px 12px rgba(0,0,0,0.08)",
+
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+
+              p: 2.5,
+
+              transition: "all 0.3s ease",
+
+              "&:hover": {
+                transform: "translateY(-6px)",
+                boxShadow: "0px 10px 20px rgba(0,0,0,0.15)",
+              },
             }}
-          />
-          <CommentIcon
-            sx={{
-              color: 'white',
-              fontSize: '28px',
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%, -50%)',
-            }}
-          />
-        </Box>
-        <Box textAlign="center">
-          <Typography sx={{ color: '#333', fontSize: '24px', fontWeight: 700 }}>
-            120
-          </Typography>
-          <Typography sx={{ color: '#666', fontSize: '14px', fontWeight: 500, fontFamily: FONT_FAMILY.tertiary }}>
-            Total Public Comments
-          </Typography>
-        </Box>
-      </Box>
+          >
+            {/* ICON WRAPPER */}
+            <Box
+              sx={{
+                mb: 2,
+              }}
+            >
+              <Box
+                sx={{
+                  width: 60,
+                  height: 60,
+
+                  backgroundColor: color,
+                  borderRadius: "50%",
+
+                  border: `2px solid ${theme.palette.background.paper}`,
+
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+
+                  boxShadow: "0px 4px 10px rgba(0,0,0,0.12)",
+                }}
+              >
+                {React.createElement(card.icon, {
+                  sx: {
+                    color: theme.palette.primary.contrastText,
+                    fontSize: 30,
+                  },
+                })}
+              </Box>
+            </Box>
+
+            {/* TEXT */}
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
+              <Typography
+                sx={{
+                  color: theme.palette.text.primary,
+                  fontSize: TYPOGRAPHY_SIZE.h4 || 24,
+                  fontWeight: 700,
+                  fontFamily: FONT_FAMILY.primary,
+                  lineHeight: 1.2,
+                }}
+              >
+                {card.value}
+              </Typography>
+
+              <Typography
+                sx={{
+                  color: theme.palette.text.secondary,
+                  fontSize: TYPOGRAPHY_SIZE.body1,
+                  fontWeight: 500,
+                  fontFamily: FONT_FAMILY.tertiary,
+                  mt: 0.8,
+                  textAlign: "center",
+                }}
+              >
+                {card.title}
+              </Typography>
+            </Box>
+          </Box>
+        );
+      })}
     </Box>
   );
 };

@@ -23,7 +23,7 @@ const ContactInfo = () => {
                 fontFamily: FONT_FAMILY.primary,
                 color: 'black',
             }}>
-                Nullam vel enim risus. Integer rhoncus hendrerit sem egestas porttitor.
+                ...we are eager to hear from you
             </Typography>
             <Typography sx={{
                 fontSize: TYPOGRAPHY_SIZE.subtitle2,
@@ -40,7 +40,7 @@ const ContactInfo = () => {
                 fontFamily: FONT_FAMILY.primary,
                 color: 'black',
             }}>
-                Level 13, 2 Elizabeth St, Melbourne, Victoria 3000 Australia
+                19, Toyota house Gaduwa, Box 971 Gboko, FCT Abuja, Nigeria
             </Typography>
             <Typography sx={{
                 fontSize: TYPOGRAPHY_SIZE.subtitle2,
@@ -57,7 +57,7 @@ const ContactInfo = () => {
                 fontFamily: FONT_FAMILY.primary,
                 color: 'black',
             }}>
-                (1) 000 991 8830, (800) 8001-8588
+                +234 7063217676
             </Typography>
             <Typography sx={{
                 fontSize: TYPOGRAPHY_SIZE.subtitle2,
@@ -74,7 +74,7 @@ const ContactInfo = () => {
                 fontFamily: FONT_FAMILY.primary,
                 color: 'black',
             }}>
-                Info@patron.com, support@patron.com
+                doppelhomes@gmail.com
             </Typography>
             <Typography
                 sx={{
@@ -94,7 +94,7 @@ const ContactInfo = () => {
                 color: 'black',
                 mt: 1,
             }}>
-                If you’re interested in employment opportunities at Unicoder, please email us:
+                If you’re interested joining or want coaching session us, please email us:
             </Typography>
             <Typography sx={{
                 fontSize: TYPOGRAPHY_SIZE.subtitle2,
@@ -103,7 +103,7 @@ const ContactInfo = () => {
                 color: 'black',
                 mt: 1,
             }}>
-                support@unicoderbd.com
+                support@dopplehome.com
             </Typography>
         </>
     );

@@ -1,126 +1,511 @@
-import {useState} from "react";
-import {styled, useTheme} from "@mui/material/styles";
-import MuiDrawer from "@mui/material/Drawer";
-import List from "@mui/material/List";
-import CssBaseline from "@mui/material/CssBaseline";
-import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import Box from "@mui/material/Box";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import {useLocation} from "react-router-dom";
-import DashboardNavigLink from "./DashboardNavigLink";
-import {navList, drawerWidth} from "./lib";
-import Stack from "@mui/material/Stack";
-import {MegaphoneRegular, QuestionCircleRegular} from "@fluentui/react-icons";
-import {styles} from "./styles";
-import Typography from "@mui/material/Typography";
+import React from "react";
+
+import {
+    Box,
+    Drawer,
+    Typography,
+    List,
+    ListItem,
+    ListItemButton,
+    ListItemText,
+    Stack,
+    Divider,
+} from "@mui/material";
+
+import {
+    alpha,
+    useTheme,
+} from "@mui/material/styles";
+
+import DashboardRoundedIcon from "@mui/icons-material/DashboardRounded";
+import HomeWorkRoundedIcon from "@mui/icons-material/HomeWorkRounded";
+import GroupsRoundedIcon from "@mui/icons-material/GroupsRounded";
+import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
+import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
+import AdminPanelSettingsRoundedIcon from "@mui/icons-material/AdminPanelSettingsRounded";
+
+import { useLocation, useNavigate } from "react-router-dom";
+
 import { FONT_FAMILY } from "../Config/font";
-import { COLOR } from "../Config/color";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
+const drawerWidth = 260;
 
-const openedMixin = (theme) => ({
-    width: drawerWidth,
-    transition: theme.transitions.create("width", {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.enteringScreen,
-    }),
-    overflowX: "hidden",
-});
+const menuItems = [
+    {
+        title: "Estate",
+        icon: <HomeWorkRoundedIcon />,
+        path: "/dashboard",
+    },
+    {
+        title: "Admin officer",
+        icon: <AdminPanelSettingsRoundedIcon />,
+        path: "/dashboard/admin",
+    },
+    {
+        title: "Realtors",
+        icon: <GroupsRoundedIcon />,
+        path: "/dashboard/realtors",
+    },
+    {
+        title: "Settings",
+        icon: <SettingsRoundedIcon />,
+        path: "/dashboard/settings",
+    },
+    {
+        title: "Sign out",
+        icon: <LogoutRoundedIcon />,
+        path: "/logout",
+    },
+];
 
-const closedMixin = (theme) => ({
-    width: "64px",
-    transition: theme.transitions.create("width", {
-        easing: theme.transitions.easing.sharp,
-        duration: theme.transitions.duration.leavingScreen,
-    }),
-    overflowX: "hidden",
-});
-
-const DrawerHeader = styled("div")(({theme}) => ({
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    padding: theme.spacing(1, 2),
-    ...theme.mixins.toolbar,
-}));
-
-const Drawer = styled(MuiDrawer, {shouldForwardProp: (prop) => prop !== "open"})(({theme, open}) => ({
-    width: drawerWidth,
-    flexShrink: 0,
-    whiteSpace: "nowrap",
-    boxSizing: "border-box",
-    ...(open
-        ? {...openedMixin(theme), "& .MuiDrawer-paper": openedMixin(theme)}
-        : {...closedMixin(theme), "& .MuiDrawer-paper": closedMixin(theme)}),
-}));
-
-export default function DashboardSidenav() {
+const DashboardSideNav = ({
+    mobileOpen,
+    onClose,
+    onTransitionEnd,
+}) => {
     const theme = useTheme();
-    const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
-    const [open, setOpen] = useState(!isSmallScreen);
+
+    const navigate = useNavigate();
+
     const location = useLocation();
 
-    const toggleDrawer = () => {
-        setOpen((prevOpen) => !prevOpen);
+    const isLight =
+        theme.palette.mode === "light";
+
+    const handleNavigate = (path) => {
+        navigate(path);
+
+        if (onClose) {
+            onClose();
+        }
     };
 
-    return (
-        <Box sx={{display: "flex", flexDirection: "column", height: "100vh"}}>
-            <CssBaseline />
-            <Drawer variant="permanent" open={open}>
-                <DrawerHeader>
-                    <Stack direction="row" spacing={1} alignItems="center">
-                        <img style={styles.logoImg} src="/Logo/Logo.png" alt="logo" />
-                        {open && (
-                            <Typography
-                                variant="body1"
-                                sx={{
-                                    fontSize: {xs: "15px", md: "18px"},
-                                    fontFamily: FONT_FAMILY.primary,
-                                    fontWeight: "700",
-                                    color: COLOR.text.primary,
-                                }}
+    const drawerContent = (
+        <Box
+            sx={{
+                height: "100%",
+
+                display: "flex",
+
+                flexDirection: "column",
+
+                backgroundColor:
+                    theme.palette.background.paper,
+
+                color:
+                    theme.palette.text.primary,
+
+                overflow: "hidden",
+            }}
+        >
+
+            <Box
+                sx={{
+                    px: 3,
+                    py: 3,
+
+                    borderBottom: `1px solid ${alpha(
+                        theme.palette.custom.border
+                            .subtle,
+                        0.5
+                    )}`,
+                }}
+            >
+                <Stack
+                    direction="row"
+                    spacing={1.5}
+                    alignItems="center"
+                >
+                    <Box
+                        sx={{
+                            width: 46,
+                            height: 46,
+
+                            borderRadius: "14px",
+
+                            display: "flex",
+
+                            alignItems: "center",
+
+                            justifyContent:
+                                "center",
+
+                            background: `linear-gradient(135deg,
+                                ${theme.palette.primary.main},
+                                ${theme.palette.primary.dark}
+                            )`,
+
+                            color:
+                                theme.palette.common
+                                    .white,
+
+                            boxShadow: `0 8px 18px ${alpha(
+                                theme.palette.primary
+                                    .main,
+                                0.28
+                            )}`,
+                        }}
+                    >
+                        <DashboardRoundedIcon />
+                    </Box>
+
+                    <Box>
+                        <Typography
+                            sx={{
+                                fontSize: "17px",
+
+                                fontWeight: 800,
+
+                                lineHeight: 1.1,
+
+                                fontFamily:
+                                    FONT_FAMILY.primary,
+
+                                color: theme
+                                    .palette.text
+                                    .primary,
+                            }}
+                        >
+                            Prime Estate
+                        </Typography>
+
+                        <Typography
+                            sx={{
+                                fontSize: "12px",
+
+                                mt: 0.4,
+
+                                color: theme
+                                    .palette.text
+                                    .secondary,
+                            }}
+                        >
+                            Admin Dashboard
+                        </Typography>
+                    </Box>
+                </Stack>
+            </Box>
+
+            {/* MENU */}
+            <Box
+                sx={{
+                    flex: 1,
+
+                    px: 2,
+                    py: 2,
+
+                    overflowY: "auto",
+                }}
+            >
+                <Typography
+                    sx={{
+                        px: 1.5,
+                        mb: 1.5,
+
+                        fontSize: "12px",
+
+                        fontWeight: 700,
+
+                        letterSpacing: 1,
+
+                        textTransform:
+                            "uppercase",
+
+                        color: theme.palette
+                            .text.secondary,
+                    }}
+                >
+                    Main Menu
+                </Typography>
+
+                <List
+                    disablePadding
+                    sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: 0.8,
+                    }}
+                >
+                    {menuItems.map((item) => {
+                        const active =
+                            location.pathname ===
+                            item.path;
+
+                        return (
+                            <ListItem
+                                key={item.title}
+                                disablePadding
                             >
-                                Doppel Estate
-                            </Typography>
-                        )}
-                    </Stack>
-                    <IconButton onClick={toggleDrawer} sx={{color: theme.palette.mode === "light" ? "#000" : "#fff"}}>
-                        {open ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-                    </IconButton>
-                </DrawerHeader>
+                                <ListItemButton
+                                    onClick={() =>
+                                        handleNavigate(
+                                            item.path
+                                        )
+                                    }
+                                    sx={{
+                                        minHeight: 52,
 
-                <Divider />
+                                        px: 1.5,
 
-                <List sx={{flexGrow: 1}}>
-                    {navList.map(({label, link, icon}) => (
-                        <DashboardNavigLink key={link} to={link} isactive={location.pathname === link ? 1 : 0}>
-                            <Stack direction="row" spacing={2} sx={{px: "10px"}}>
-                                <Box>{icon}</Box>
-                                {open && <Box>{label}</Box>}
-                            </Stack>
-                        </DashboardNavigLink>
-                    ))}
+                                        borderRadius:
+                                            "16px",
+
+                                        display: "flex",
+
+                                        alignItems:
+                                            "center",
+
+                                        gap: 1.5,
+
+                                        transition:
+                                            "all 0.25s ease",
+
+                                        backgroundColor:
+                                            active
+                                                ? alpha(
+                                                      theme
+                                                          .palette
+                                                          .primary
+                                                          .main,
+                                                      isLight
+                                                          ? 0.12
+                                                          : 0.18
+                                                  )
+                                                : "transparent",
+
+                                        border: active
+                                            ? `1px solid ${alpha(
+                                                  theme
+                                                      .palette
+                                                      .primary
+                                                      .main,
+                                                  0.22
+                                              )}`
+                                            : `1px solid transparent`,
+
+                                        "&:hover":
+                                            {
+                                                backgroundColor:
+                                                    active
+                                                        ? alpha(
+                                                              theme
+                                                                  .palette
+                                                                  .primary
+                                                                  .main,
+                                                              isLight
+                                                                  ? 0.16
+                                                                  : 0.24
+                                                          )
+                                                        : theme
+                                                              .palette
+                                                              .custom
+                                                              .card
+                                                              .body,
+
+                                                transform:
+                                                    "translateX(3px)",
+                                            },
+                                    }}
+                                >
+                                    <Box
+                                        sx={{
+                                            display:
+                                                "flex",
+
+                                            alignItems:
+                                                "center",
+
+                                            justifyContent:
+                                                "center",
+
+                                            color:
+                                                active
+                                                    ? theme
+                                                          .palette
+                                                          .primary
+                                                          .main
+                                                    : theme
+                                                          .palette
+                                                          .text
+                                                          .secondary,
+                                        }}
+                                    >
+                                        {item.icon}
+                                    </Box>
+
+                                    <ListItemText
+                                        primary={
+                                            item.title
+                                        }
+                                        primaryTypographyProps={{
+                                            fontSize:
+                                                "14px",
+
+                                            fontWeight:
+                                                active
+                                                    ? 700
+                                                    : 500,
+
+                                            color:
+                                                active
+                                                    ? theme
+                                                          .palette
+                                                          .primary
+                                                          .main
+                                                    : theme
+                                                          .palette
+                                                          .text
+                                                          .primary,
+
+                                            fontFamily:
+                                                FONT_FAMILY.primary,
+                                        }}
+                                    />
+                                </ListItemButton>
+                            </ListItem>
+                        );
+                    })}
                 </List>
+            </Box>
 
-                <Divider />
+            {/* FOOTER */}
+            <Box
+                sx={{
+                    px: 2.5,
+                    py: 2.2,
 
-                <Box sx={{paddingBottom: "1rem", paddingTop: "1rem"}}>
-                    <Stack spacing={2} sx={{px: open ? "16px" : "10px"}}>
-                        <Stack direction="row" spacing={1} alignItems="center">
-                            <QuestionCircleRegular style={{fontSize: "20px"}} />
-                            {open && <Typography sx={{fontSize: "14px", color: "white"}}>Help</Typography>}
-                        </Stack>
-                        <Stack direction="row" spacing={1} alignItems="center">
-                            <MegaphoneRegular style={{fontSize: "20px"}} />
-                            {open && <Typography sx={{fontSize: "14px", color: "white"}}>Report</Typography>}
-                        </Stack>
-                    </Stack>
-                </Box>
-            </Drawer>
+                    borderTop: `1px solid ${alpha(
+                        theme.palette.custom.border
+                            .subtle,
+                        0.4
+                    )}`,
+                }}
+            >
+                <Typography
+                    sx={{
+                        fontSize: "13px",
+
+                        fontWeight: 600,
+
+                        color: theme.palette
+                            .text.primary,
+                    }}
+                >
+                    Prime Estate CRM
+                </Typography>
+
+                <Typography
+                    sx={{
+                        fontSize: "12px",
+
+                        mt: 0.5,
+
+                        color: theme.palette
+                            .text.secondary,
+                    }}
+                >
+                    Smart property management
+                    solution
+                </Typography>
+            </Box>
         </Box>
     );
-}
+
+    return (
+        <>
+            {/* MOBILE DRAWER */}
+            <Drawer
+                variant="temporary"
+                open={mobileOpen}
+                onClose={onClose}
+                onTransitionEnd={
+                    onTransitionEnd
+                }
+                ModalProps={{
+                    keepMounted: true,
+                }}
+                sx={{
+                    display: {
+                        xs: "block",
+                        md: "none",
+                    },
+
+                    "& .MuiDrawer-paper": {
+                        width: drawerWidth,
+
+                        boxSizing:
+                            "border-box",
+
+                        border: "none",
+
+                        backgroundColor:
+                            theme.palette
+                                .background.paper,
+
+                        boxShadow: `0 12px 40px ${alpha(
+                            theme.palette.common
+                                .black,
+                            0.25
+                        )}`,
+                    },
+                }}
+            >
+                {drawerContent}
+            </Drawer>
+
+            {/* DESKTOP DRAWER */}
+            <Drawer
+                variant="permanent"
+                open
+                sx={{
+                    display: {
+                        xs: "none",
+                        md: "block",
+                    },
+
+                    width: drawerWidth,
+
+                    flexShrink: 0,
+
+                    "& .MuiDrawer-paper": {
+                        width: drawerWidth,
+
+                        boxSizing:
+                            "border-box",
+
+                        top: "70px",
+
+                        height:
+                            "calc(100% - 70px)",
+
+                        overflowX:
+                            "hidden",
+
+                        borderRight: `1px solid ${alpha(
+                            theme.palette.custom
+                                .border.subtle,
+                            0.5
+                        )}`,
+
+                        backgroundColor:
+                            alpha(
+                                theme.palette
+                                    .background.paper,
+                                0.94
+                            ),
+
+                        backdropFilter:
+                            "blur(14px)",
+
+                        WebkitBackdropFilter:
+                            "blur(14px)",
+                    },
+                }}
+            >
+                {drawerContent}
+            </Drawer>
+        </>
+    );
+};
+
+export default DashboardSideNav;

@@ -1,115 +1,257 @@
-import { useState } from 'react'
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Avatar from '@mui/material/Avatar';
-import { motion, AnimatePresence } from 'framer-motion'
-import { CommentQuoteFilled } from '@fluentui/react-icons';
+import { useState } from "react";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Avatar from "@mui/material/Avatar";
+import Paper from "@mui/material/Paper";
+import { useTheme, alpha } from "@mui/material/styles";
+import { motion, AnimatePresence } from "framer-motion";
+import { CommentQuoteFilled } from "@fluentui/react-icons";
+
 const testimonials = [
   {
     quote:
-      'Posuere mus curabitur parturient scelerisque suspendisse elementum facilisis dignissim non purus torquent turpis interdum hendrerit erat ultrices pretium risus elementum. Fringilla aliquet mattis lacinia quam a montes maecenas parturient urna varius. Sollicitudin pede sapien taciti dui.',
-    name: 'Mark Wiggins',
-    position: 'CEO ( Grodins Group )',
-    image: 'https://randomuser.me/api/portraits/men/1.jpg' // Profile Image
+      "Posuere mus curabitur parturient scelerisque suspendisse elementum facilisis dignissim non purus torquent turpis interdum hendrerit erat ultrices pretium risus elementum.",
+    name: "Mark Wiggins",
+    position: "CEO ( Grodins Group )",
+    image: "https://randomuser.me/api/portraits/men/1.jpg",
   },
   {
     quote:
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla condimentum tortor sem.',
-    name: 'Jane Doe',
-    position: 'Managing Director ( XYZ Corp )',
-    image: 'https://randomuser.me/api/portraits/women/2.jpg'
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla condimentum tortor sem.",
+    name: "Jane Doe",
+    position: "Managing Director ( XYZ Corp )",
+    image: "https://randomuser.me/api/portraits/women/2.jpg",
   },
   {
     quote:
-      'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.',
-    name: 'John Smith',
-    position: 'CTO ( ABC Ltd )',
-    image: 'https://randomuser.me/api/portraits/men/3.jpg'
-  }
-]
+      "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
+    name: "John Smith",
+    position: "CTO ( ABC Ltd )",
+    image: "https://randomuser.me/api/portraits/men/3.jpg",
+  },
+];
 
 const TestimonialSlider = () => {
-  const [index, setIndex] = useState(0)
+  const theme = useTheme();
+  const [index, setIndex] = useState(0);
+
+  const accent = theme.palette.custom.accent;
+  const isLight = theme.palette.mode === "light";
 
   return (
-    <Box sx={{ textAlign: 'center', maxWidth: 800, margin: 'auto', py: 5 }}>
-      <Typography
-        variant='caption'
-        color='#000'
-        sx={{ letterSpacing: 1 }}
-      >
-        Testimonial
-      </Typography>
-
-      <Typography variant='h4' fontWeight='bold' sx={{ mt: 1, color: '#000', mb: 2 }}>
-        What Clients Say About Us
-      </Typography>
-
-      <Box
+    <Box
+      sx={{
+        py: { xs: 6, md: 10 },
+        px: 2,
+        backgroundColor: theme.palette.background.default,
+      }}
+    >
+      <Paper
+        elevation={0}
         sx={{
-          width: 50,
-          height: 3,
-          backgroundColor: '#c49b63',
-          margin: 'auto',
-          mb: 2
+          maxWidth: 850,
+          mx: "auto",
+          textAlign: "center",
+          px: { xs: 3, sm: 5, md: 8 },
+          py: { xs: 5, md: 7 },
+
+          backgroundColor: theme.palette.custom.card.body,
+
+          border: `1px solid ${theme.palette.custom.card.border}`,
+
+          borderRadius: 4,
+
+          position: "relative",
+
+          overflow: "hidden",
+
+          "&::before": {
+            content: '""',
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: 4,
+            background: `linear-gradient(to right, ${theme.palette.primary.main}, ${accent})`,
+          },
         }}
-      />
-
-      <CommentQuoteFilled size={40} color='#c49b63' />
-
-      <AnimatePresence mode='wait'>
-        <motion.div
-          key={index}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          transition={{ duration: 0.5 }}
+      >
+        <Typography
+          variant="caption"
+          sx={{
+            letterSpacing: 2,
+            textTransform: "uppercase",
+            fontWeight: 600,
+            color: accent,
+          }}
         >
-          <Avatar
-            src={testimonials[index].image}
-            alt={testimonials[index].name}
-            sx={{
-              width: 80,
-              height: 80,
-              margin: '20px auto',
-              border: '3px solid #c49b63'
-            }}
-          />
+          Testimonial
+        </Typography>
 
-          <Typography
-            variant='body1'
-            sx={{ fontStyle: 'italic', mt: 2, color: '#000' }}
+        <Typography
+          variant="h4"
+          sx={{
+            mt: 1.5,
+            mb: 2,
+            fontWeight: 700,
+            color: theme.palette.text.primary,
+          }}
+        >
+          What Clients Say About Us
+        </Typography>
+
+        <Box
+          sx={{
+            width: 70,
+            height: 4,
+            borderRadius: 10,
+            backgroundColor: theme.palette.primary.main,
+            mx: "auto",
+            mb: 4,
+          }}
+        />
+
+        <Box
+          sx={{
+            width: 70,
+            height: 70,
+            mx: "auto",
+            mb: 3,
+
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+
+            borderRadius: "50%",
+
+            backgroundColor: alpha(
+              theme.palette.primary.main,
+              isLight ? 0.08 : 0.18
+            ),
+
+            border: `1px solid ${alpha(
+              theme.palette.primary.main,
+              0.2
+            )}`,
+          }}
+        >
+          <CommentQuoteFilled
+            size={34}
+            color={theme.palette.primary.main}
+          />
+        </Box>
+
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, y: 25 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -25 }}
+            transition={{ duration: 0.45 }}
           >
-            “ {testimonials[index].quote} ”
-          </Typography>
+            <Avatar
+              src={testimonials[index].image}
+              alt={testimonials[index].name}
+              sx={{
+                width: 90,
+                height: 90,
+                mx: "auto",
+                mb: 3,
 
-          <Typography variant='subtitle2' fontWeight='bold' sx={{ mt: 2,color: '#000'  }}>
-            {testimonials[index].name}
-          </Typography>
-          <Typography variant='caption' color='#c49b63'>
-            {testimonials[index].position}
-          </Typography>
-        </motion.div>
-      </AnimatePresence>
+                border: `4px solid ${theme.palette.background.paper}`,
 
-      <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1, mt: 3 }}>
-        {testimonials.map((_, i) => (
-          <Box
-            key={i}
-            sx={{
-              width: i === index ? 10 : 6,
-              height: i === index ? 10 : 6,
-              borderRadius: '50%',
-              backgroundColor: i === index ? '#c49b63' : '#e0e0e0',
-              transition: 'all 0.3s ease',
-              cursor: 'pointer'
-            }}
-            onClick={() => setIndex(i)}
-          />
-        ))}
-      </Box>
+                outline: `3px solid ${accent}`,
+
+                boxShadow: `0 10px 30px ${alpha(
+                  theme.palette.primary.main,
+                  0.18
+                )}`,
+              }}
+            />
+
+            <Typography
+              variant="body1"
+              sx={{
+                maxWidth: 650,
+                mx: "auto",
+
+                lineHeight: 1.9,
+
+                fontStyle: "italic",
+
+                color: theme.palette.text.secondary,
+              }}
+            >
+              “ {testimonials[index].quote} ”
+            </Typography>
+
+            <Typography
+              variant="h6"
+              sx={{
+                mt: 4,
+                fontWeight: 700,
+                color: theme.palette.text.primary,
+              }}
+            >
+              {testimonials[index].name}
+            </Typography>
+
+            <Typography
+              variant="body2"
+              sx={{
+                mt: 0.5,
+                color: accent,
+                fontWeight: 500,
+              }}
+            >
+              {testimonials[index].position}
+            </Typography>
+          </motion.div>
+        </AnimatePresence>
+
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            gap: 1.2,
+            mt: 5,
+          }}
+        >
+          {testimonials.map((_, i) => {
+            const active = i === index;
+
+            return (
+              <Box
+                key={i}
+                onClick={() => setIndex(i)}
+                sx={{
+                  width: active ? 28 : 10,
+                  height: 10,
+
+                  borderRadius: 10,
+
+                  backgroundColor: active
+                    ? theme.palette.primary.main
+                    : alpha(theme.palette.text.secondary, 0.25),
+
+                  transition: "all 0.3s ease",
+
+                  cursor: "pointer",
+
+                  "&:hover": {
+                    backgroundColor: active
+                      ? theme.palette.primary.dark
+                      : alpha(theme.palette.primary.main, 0.45),
+                  },
+                }}
+              />
+            );
+          })}
+        </Box>
+      </Paper>
     </Box>
-  )
-}
+  );
+};
 
-export default TestimonialSlider
+export default TestimonialSlider;

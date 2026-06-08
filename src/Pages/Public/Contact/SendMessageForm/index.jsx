@@ -1,7 +1,7 @@
 import React from 'react';
 import { Grid, Typography, TextField, Button } from '@mui/material';
-import { FONT_FAMILY } from '../../../Config/font';
-import { TYPOGRAPHY_SIZE } from '../../../Config/typography';
+import { FONT_FAMILY } from '../../../../Config/font';
+import { TYPOGRAPHY_SIZE } from '../../../../Config/typography';
 
 const SendMessageForm = () => {
     return (

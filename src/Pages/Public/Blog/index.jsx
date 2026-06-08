@@ -1,4 +1,5 @@
 import Box from '@mui/material/Box'
+import { useTheme } from '@mui/material/styles'
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
 import Card from '@mui/material/Card'
@@ -16,14 +17,16 @@ import { FONT_FAMILY } from '../../../Config/font'
 import { blogData, categories, recentPosts, recentProperties, tags } from './data'
 import Container from '@mui/material/Container'
 import { PageFirstBg } from '../../../Component'
+import HeroSearchSection from '../../../Component/HeroSearch'
 
 export default function BlogPage () {
   const navigate = useNavigate()
+  const theme = useTheme();
 
   return (
     <>
       <PageFirstBg label=" Home / Blog" subLabel='Blogs'/>
-      <Box px={4} py={8} sx={{ backgroundColor: 'whitesmoke' }}>
+      <Box px={4} py={8} sx={{ backgroundColor: theme.palette.background.default }}>
         <Container maxWidth='lg'>
           <Grid container spacing={4}>
             <Grid item xs={12} md={8}>
@@ -66,18 +69,20 @@ export default function BlogPage () {
             </Grid>
 
             <Grid item xs={12} md={4}>
-              <Box mb={4} sx={{ backgroundColor: '#fff', py: 4, px: 4 }}>
-                <Box sx={{ backgroundColor: 'whitesmoke' }}>
+              <Box mb={4} sx={{ backgroundColor: theme.palette.primary.contrastText, py: 4, px: 4 }}>
+                <Box sx={{ backgroundColor: theme.palette.background.default, flexDirection:"row"}}>
                   <TextField
                     fullWidth
                     placeholder='Search ...'
                     size='small'
                     variant='outlined'
+
                   />
+                    <HeroSearchSection/>
                 </Box>
               </Box>
 
-              <Box mb={4} sx={{ backgroundColor: '#fff', py: 4, px: 4 }}>
+              <Box mb={4} sx={{ backgroundColor: theme.palette.background.default, py: 4, px: 4 }}>
                 <Typography
                   variant='subtitle1'
                   sx={{ fontFamily: FONT_FAMILY.quaternary }}
@@ -102,11 +107,12 @@ export default function BlogPage () {
                 </List>
               </Box>
 
-              <Box mb={4} sx={{ backgroundColor: '#fff', py: 4, px: 4 }}>
+              <Box mb={4} sx={{ backgroundColor: theme.palette.background.default, py: 4, px: 4 }}>
                 <Typography
                   variant='subtitle1'
                   sx={{ fontFamily: FONT_FAMILY.quaternary }}
                   fontWeight={600}
+                  
                 >
                   RECENT POSTS
                 </Typography>
@@ -125,7 +131,7 @@ export default function BlogPage () {
                 </List>
               </Box>
 
-              <Box mb={4} sx={{ backgroundColor: '#fff', py: 4, px: 4 }}>
+              <Box mb={4} sx={{ backgroundColor: theme.palette.background.default , py: 4, px: 4 }}>
                 <Typography
                   variant='subtitle1'
                   sx={{ fontFamily: FONT_FAMILY.quaternary }}
@@ -149,7 +155,7 @@ export default function BlogPage () {
                   ))}
                 </Stack>
               </Box>
-              <Box sx={{ backgroundColor: '#fff', py: 4, px: 4 }}>
+              <Box sx={{ backgroundColor: theme.palette.background.default, py: 4, px: 4 }}>
                 <Typography
                   variant='subtitle1'
                   sx={{ fontFamily: FONT_FAMILY.quaternary }}

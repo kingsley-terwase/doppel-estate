@@ -1,10 +1,12 @@
 import React from 'react';
 import { Box, Grid } from '@mui/material';
 import LoginImageSection from '../Login/LoginImageSection';
-import LoginFormSection from '../Login/LoginFormSection';
-
+import LoginFormSection from './LoginFormSection';
+import { ToastContainer, toast } from "react-toastify";
+import { useTheme } from '@mui/material/styles';
 
 const Login = () => {
+  const theme = useTheme();
   return (
     <Box
       sx={{
@@ -13,7 +15,7 @@ const Login = () => {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'grey.200',
+        backgroundColor: theme.palette.background.default,
       }}
     >
       <Grid container sx={{ height: '100%' }}>

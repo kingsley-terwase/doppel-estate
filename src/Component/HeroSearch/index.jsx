@@ -1,69 +1,111 @@
-import React from 'react'
-import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
-import TextField from '@mui/material/TextField'
-import Button from '@mui/material/Button'
-import { COLOR } from '../../Config/color'
-import { FONT_FAMILY } from '../../Config/font'
-import AnimatedText from '../Animation/AnimatedText'
+import React from "react";
 
-export default function HeroSearchSection () {
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+
+import { useTheme } from "@mui/material/styles";
+
+const HeroSearchSection = () => {
+  const theme = useTheme();
+
   return (
     <Box>
       <Box
         sx={{
-          display: 'flex',
-          alignItems: 'center',
-          width: {
-            xs: '100%',
-            sm: '100%',
-            md: '100%',
-            lg: '100%',
-            xl: '100%'
-          },
-          bgcolor: 'whitesmoke',
-          borderRadius: 1,
-          maxWidth: '1100px',
-          p: 2,
+          display: "flex",
+          alignItems: "center",
+
+          width: "100%",
+
+          maxWidth: "1100px",
+
+          mx: "auto",
           mt: 10,
-          mx: 'auto',
-          overflow: 'hidden',
-          color: '#000'
+
+          p: 1,
+
+          overflow: "hidden",
+
+          borderRadius: "16px",
+
+          backgroundColor: theme.palette.background.paper,
+
+          border: `1px solid ${theme.palette.custom.border.subtle}`,
+
+          boxShadow: "0px 6px 18px rgba(0,0,0,0.08)",
+
+          backdropFilter: "blur(8px)",
+
+          gap: 1,
+
+          flexDirection: {
+            xs: "column",
+            sm: "row",
+          },
         }}
       >
+        {/* INPUT */}
         <TextField
-          variant='outlined'
-          placeholder='Enter Property type...'
+          variant="outlined"
+          placeholder="Enter property type..."
           fullWidth
           sx={{
-            '& fieldset': { border: 'none' },
-            ml: 1,
-            '& .MuiOutlinedInput-root': {
-              color: '#000'
+            "& .MuiOutlinedInput-root": {
+              borderRadius: "12px",
+
+              backgroundColor:
+                theme.palette.background.paper,
+
+              color: theme.palette.text.primary,
+
+              "& fieldset": {
+                border: "none",
+              },
+
+              "& input::placeholder": {
+                color: theme.palette.text.secondary,
+                opacity: 1,
+              },
             },
-            '& .MuiOutlinedInput-input::placeholder': {
-              color: '#000',
-              opacity: 1
-            }
           }}
         />
 
+        {/* BUTTON */}
         <Button
-          variant='contained'
+          variant="contained"
           sx={{
-            borderRadius: 10,
-            backgroundColor: COLOR.primary,
-            color: '#fff',
-            px: 3,
-            textTransform: 'none',
-            '&:hover': {
-              backgroundColor: COLOR.primary
-            }
+            borderRadius: "12px",
+
+            px: 4,
+            py: 1.6,
+
+            minWidth: {
+              xs: "100%",
+              sm: "140px",
+            },
+
+            backgroundColor:
+              theme.palette.primary.main,
+
+            color:
+              theme.palette.primary.contrastText,
+
+            textTransform: "none",
+
+            fontWeight: 600,
+
+            "&:hover": {
+              backgroundColor:
+                theme.palette.primary.dark,
+            },
           }}
         >
           Search
         </Button>
       </Box>
     </Box>
-  )
-}
+  );
+};
+
+export default HeroSearchSection;

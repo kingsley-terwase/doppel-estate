@@ -24,9 +24,8 @@ export const blogData = [
 ];
 
 export const categories = [
+  { label: 'Landed property', count: 23 },
   { label: 'Apartment', count: 23 },
-  { label: 'Condo', count: 10 },
-  { label: 'Family House', count: 9 },
   { label: 'Modern Villa', count: 35 },
   { label: 'Town House', count: 5 }
 ]

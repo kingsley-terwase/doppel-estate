@@ -1,7 +1,10 @@
-import IconButton from '@mui/material/IconButton';
+import IconButton from '@mui/material/IconButton'
+import { useTheme } from '@mui/material/styles'
 
 export const NextArrow = (props) => {
-  const { onClick } = props;
+  const theme = useTheme()
+  const { onClick } = props
+
   return (
     <IconButton
       onClick={onClick}
@@ -13,20 +16,22 @@ export const NextArrow = (props) => {
         height: 40,
         borderRadius: '50%',
         zIndex: 5,
-        color: 'white',
-        backgroundColor: 'rgba(0, 0, 0, 0.5)', 
+        color: theme.palette.primary.contrastText,        // ✅ white
+        backgroundColor: theme.palette.custom.button.main, // ✅ was: palette.button.main
         '&:hover': {
-          backgroundColor: 'rgba(0, 0, 0, 0.7)',
+          backgroundColor: theme.palette.custom.button.hover, // ✅ was: palette.button.dark
         },
       }}
     >
       ➡
     </IconButton>
-  );
-};
+  )
+}
 
 export const PrevArrow = (props) => {
-  const { onClick } = props;
+  const theme = useTheme()
+  const { onClick } = props
+
   return (
     <IconButton
       onClick={onClick}
@@ -38,14 +43,14 @@ export const PrevArrow = (props) => {
         height: 40,
         borderRadius: '50%',
         zIndex: 5,
-        color: 'white',
-        backgroundColor: 'rgba(0, 0, 0, 0.5)', 
+        color: theme.palette.primary.contrastText,         // ✅ was: palette.primary.neutral
+        backgroundColor: theme.palette.custom.button.main,  // ✅ was: palette.button.main
         '&:hover': {
-          backgroundColor: 'rgba(0, 0, 0, 0.7)',
+          backgroundColor: theme.palette.custom.button.hover, // ✅ was: palette.button.dark
         },
       }}
     >
       ⬅
     </IconButton>
-  );
-};
+  )
+}

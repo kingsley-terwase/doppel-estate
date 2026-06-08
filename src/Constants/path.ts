@@ -1,0 +1,1 @@
+export const SERVER_BASE_URL = "https://doppelhomes-backend-jfgg.onrender.com/V1";

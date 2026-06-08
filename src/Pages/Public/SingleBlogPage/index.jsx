@@ -1,4 +1,5 @@
 import { useParams, useNavigate } from 'react-router-dom'
+import { useTheme } from '@mui/material/styles'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Grid from '@mui/material/Grid'
@@ -16,8 +17,10 @@ import Container from '@mui/material/Container'
 import { PageFirstBg, ReviewForm } from '../../../Component'
 import { categories, recentPosts, recentProperties, tags } from '../Blog/data'
 import TextField from '@mui/material/TextField';
+
 export default function SingleBlogPage () {
   const { id } = useParams()
+const theme = useTheme();
   const navigate = useNavigate()
   const blog = blogData.find(blog => blog.id === parseInt(id))
 
@@ -30,7 +33,7 @@ export default function SingleBlogPage () {
       <PageFirstBg label='Home/blogs/singleblogs' subLabel='Blogs' />
       <Box px={4} py={2} sx={{ backgroundColor: 'whitesmoke' }}>
         <Container maxWidth='lg'>
-          <Button sx={{ mb: 2, color: '#fff' }}>
+          <Button sx={{ mb: 2, color: theme.palette.common.white }}>
             <Typography
               variant='body2'
               sx={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}
@@ -43,7 +46,7 @@ export default function SingleBlogPage () {
 
           <Grid container spacing={4}>
             <Grid item xs={12} md={8}>
-              <Box sx={{ backgroundColor: '#fff' }}>
+              <Box sx={{ backgroundColor: theme.palette.background.paper }}>
                 <img
                   src={blog.image}
                   alt={blog.title}
@@ -66,7 +69,7 @@ export default function SingleBlogPage () {
             </Grid>
 
             <Grid item xs={12} md={4}>
-              <Box mb={4} sx={{ backgroundColor: '#fff', py: 4, px: 4 }}>
+              <Box mb={4} sx={{ backgroundColor: theme.palette.background.contrastText  , py: 4, px: 4 }}>
                 <Box sx={{ backgroundColor: 'whitesmoke' }}>
                   <TextField
                     fullWidth
@@ -77,7 +80,7 @@ export default function SingleBlogPage () {
                 </Box>
               </Box>
 
-              <Box mb={4} sx={{ backgroundColor: '#fff', py: 4, px: 4 }}>
+              <Box mb={4} sx={{ backgroundColor: theme.palette.background.contrastText, py: 4, px: 4 }}>
                 <Typography
                   variant='subtitle1'
                   sx={{ fontFamily: FONT_FAMILY.quaternary }}
@@ -102,7 +105,7 @@ export default function SingleBlogPage () {
                 </List>
               </Box>
 
-              <Box mb={4} sx={{ backgroundColor: '#fff', py: 4, px: 4 }}>
+              <Box mb={4} sx={{ backgroundColor: theme.palette.background.contrastText, py: 4, px: 4 }}>
                 <Typography
                   variant='subtitle1'
                   sx={{ fontFamily: FONT_FAMILY.quaternary }}
@@ -125,7 +128,7 @@ export default function SingleBlogPage () {
                 </List>
               </Box>
 
-              <Box mb={4} sx={{ backgroundColor: '#fff', py: 4, px: 4 }}>
+              <Box mb={4} sx={{ backgroundColor: theme.palette.background.contrastText, py: 4, px: 4 }}>
                 <Typography
                   variant='subtitle1'
                   sx={{ fontFamily: FONT_FAMILY.quaternary }}
@@ -141,7 +144,7 @@ export default function SingleBlogPage () {
                       label={tag}
                       sx={{
                         cursor: 'pointer',
-                        '&:hover': { backgroundColor: '#1565C0', color: '#fff' }
+                        '&:hover': { backgroundColor: theme.palette.primary.main, color: theme.palette.common.white }
                       }}
                       variant='outlined'
                       size='small'
@@ -149,7 +152,7 @@ export default function SingleBlogPage () {
                   ))}
                 </Stack>
               </Box>
-              <Box sx={{ backgroundColor: '#fff', py: 4, px: 4 }}>
+              <Box sx={{ backgroundColor: theme.palette.background.contrastText, py: 4, px: 4 }}>
                 <Typography
                   variant='subtitle1'
                   sx={{ fontFamily: FONT_FAMILY.quaternary }}
