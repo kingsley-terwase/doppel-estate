@@ -9,7 +9,7 @@ import Signup from "../Pages/Public/Signup";
 import BlogPage from "../Pages/Public/Blog";
 import SingleBlogPage from "../Pages/Public/SingleBlogPage";
 import AboutUsPage from "../Pages/Public/AboutUs";
-import PropertyDetail from '../Pages/propertyDetail'
+import PropertyDetail from "../Pages/Public/PropertyDetail";
 import OtpVerification from '../Pages/Public/OtpVerification'
 const PublicRoutes = () => {
     return (

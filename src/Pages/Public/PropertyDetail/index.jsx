@@ -1,9 +1,9 @@
 import { useParams, useNavigate } from 'react-router-dom'
 import { Box, Container, Typography, Stack, Chip, Button } from '@mui/material'
 import { Location16Regular } from '@fluentui/react-icons'
-import { property } from '../Public/Home/data'
+import { property } from '../Home/data'
 import { useTheme } from '@mui/material/styles'
-import { FONT_FAMILY } from '../../Config/font'
+import { FONT_FAMILY } from '../../../Config/font'
 
 // ── Pure utility — no hook needed here ───────────────────────────────────────
 const formatPrice = (price) => {
@@ -61,13 +61,13 @@ const PropertyDetail = () => {
   const navigate = useNavigate()
 
   // ✅ all theme-derived constants defined INSIDE the component
-  const GOLD      = theme.palette.custom?.accent    ?? '#c49b63'
-  const BG_PAGE   = '#0f0f0f'
-  const BG_CARD   = '#161616'
-  const TEXT_DIM  = theme.palette.text.disabled
+  const GOLD = theme.palette.custom?.accent ?? '#c49b63'
+  const BG_PAGE = '#0f0f0f'
+  const BG_CARD = '#161616'
+  const TEXT_DIM = theme.palette.text.disabled
   const AVAILABLE = theme.palette.primary.main
-  const SOLD_FG   = TEXT_DIM
-  const SOLD_BG   = BG_CARD
+  const SOLD_FG = TEXT_DIM
+  const SOLD_BG = BG_CARD
 
   const item = property.find(p => p.propertynumber === id)
   const cleanSize = item?.size ? String(item.size).replace(/[a-zA-Z]/g, '').trim() : null
@@ -99,10 +99,10 @@ const PropertyDetail = () => {
   )
 
   const stats = [
-    cleanSize      && { label: 'Area (sqm)', value: cleanSize },
-    item.bedrooms  && { label: 'Bedrooms',   value: item.bedrooms },
-    item.bathrooms && { label: 'Bathrooms',  value: item.bathrooms },
-    item.type      && { label: 'Type',       value: item.type },
+    cleanSize && { label: 'Area (sqm)', value: cleanSize },
+    item.bedrooms && { label: 'Bedrooms', value: item.bedrooms },
+    item.bathrooms && { label: 'Bathrooms', value: item.bathrooms },
+    item.type && { label: 'Type', value: item.type },
   ].filter(Boolean)
 
   const isSoldOut = item.status === 'soldout'
